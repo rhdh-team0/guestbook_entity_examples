@@ -10,8 +10,8 @@ spec:
   lifecycle: production
   owner: dev-team
   dependsOn:
-    - resource:database/customer_database
-    - resource:S3-bucker/images_s3
+    - resource:customer_database
+    - resource:images_s3
   providesApis:
     - customer_api
    
