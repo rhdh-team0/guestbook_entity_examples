@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: dev-team
+  description: "Dev Team"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/dev-team.yaml"
+spec:
+  type: team
+  profile:
+    displayName: "Dev Team"
+    email: dev-team@myorg.com
+  parent: my-org
+  children: []
