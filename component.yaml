@@ -10,5 +10,5 @@ spec:
   lifecycle: production
   owner: dev-team
   dependsOn:
-    - database
-    - s3-bucket
+    - customer_database
+    - images_s3
