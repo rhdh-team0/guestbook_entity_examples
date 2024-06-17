@@ -1,0 +1,78 @@
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: citizendocs-system
+  tags:
+    - citizendocs
+spec:
+  owner: rhdh  
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: citizendocs_database
+  description: "Documents"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/database.yaml"
+spec:
+  type: database
+  owner: rhdh
+  system: citizendocs-system
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: documents_api
+  description: "Get Documents API"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-grpc-api.yaml"
+spec:
+  type: grpc
+  lifecycle: production
+  owner: rhdh
+  system: citizendocs-system
+  definition: |
+    syntax = "proto3";
+    package myorg.mygrpcapi;
+    message MyRequest {
+      string query = 1;
+    }
+    message MyResponse {
+      string result = 1;
+    }
+    service MyGrpcApi {
+      rpc MyMethod (MyRequest) returns (MyResponse);
+    }
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: citizendocs-backend
+  description: "Event Backend Service"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-backend.yaml"
+spec:
+  type: service
+  lifecycle: production
+  owner: rhdh
+  system: citizendocs-system
+  dependsOn:
+    - resource:citizendocs_database
+  providesApis:
+    - documents_api
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: citizendocs-frontend
+  description: "Citizen Documentation"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-frontend.yaml"
+spec:
+  type: service
+  lifecycle: production
+  owner: rhdh
+  system: citizendocs-system
+  consumesApis:
+    - documents_api
