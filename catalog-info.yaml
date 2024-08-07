@@ -25,7 +25,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: globex_database
+  name: globex-database
   description: "Globex Database"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/database.yaml"
@@ -37,7 +37,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: globex_api
+  name: globex-api
   description: "Globex API"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-grpc-api.yaml"
@@ -72,9 +72,9 @@ spec:
   owner: dev-team
   system: globex-system
   dependsOn:
-    - resource:citizendocs_database
+    - resource:globex-database
   providesApis:
-    - globex_api
+    - globex-api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
@@ -89,4 +89,4 @@ spec:
   owner: dev-team
   system: globex-system
   consumesApis:
-    - globex_api
+    - globex-api
