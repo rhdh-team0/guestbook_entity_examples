@@ -1,37 +1,51 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: dev-team
+  description: "Dev Team"
+  annotations:
+    backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/dev-team.yaml"
+spec:
+  type: team
+  profile:
+    displayName: "Dev Team"
+    email: dev-team@globexcorp.com
+  parent: my-org
+  children: []
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: citizendocs-system
+  name: globex-system
   tags:
-    - citizendocs
+    - globexcorp
 spec:
-  owner: rhdh  
+  owner: dev-team  
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: citizendocs_database
-  description: "Documents"
+  name: globex_database
+  description: "Globex Database"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/database.yaml"
 spec:
   type: database
-  owner: rhdh
-  system: citizendocs-system
+  owner: dev-team
+  system: globex-system
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: documents_api
-  description: "Get Documents API"
+  name: globex_api
+  description: "Globex API"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-grpc-api.yaml"
 spec:
   type: grpc
   lifecycle: production
-  owner: rhdh
-  system: citizendocs-system
+  owner: dev-team
+  system: globex-system
   definition: |
     syntax = "proto3";
     package myorg.mygrpcapi;
@@ -48,31 +62,31 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: citizendocs-backend
-  description: "Event Backend Service"
+  name: globex-system
+  description: "Globex Backend Service"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-backend.yaml"
 spec:
   type: service
   lifecycle: production
-  owner: rhdh
-  system: citizendocs-system
+  owner: dev-team
+  system: globex-system
   dependsOn:
     - resource:citizendocs_database
   providesApis:
-    - documents_api
+    - globex_api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: citizendocs-frontend
-  description: "Citizen Documentation"
+  name: globex-frontend
+  description: "Globex Frontend"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-frontend.yaml"
 spec:
   type: service
   lifecycle: production
-  owner: rhdh
-  system: citizendocs-system
+  owner: dev-team
+  system: globex-system
   consumesApis:
-    - documents_api
+    - globex_api
