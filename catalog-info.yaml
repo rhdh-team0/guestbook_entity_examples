@@ -73,7 +73,7 @@ spec:
   owner: dev-team
   system: globex-system
   dependsOn:
-    - resource: globex-database
+    - resource:globex-database
   providesApis:
     - globex-api
 ---
