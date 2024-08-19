@@ -25,7 +25,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
-  name: globex-database
+  name: guestbook-database
   description: "MongoDB"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/database.yaml"
@@ -38,7 +38,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: API
 metadata:
-  name: globex-api
+  name: guestbook-api
   description: "Globex API"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-grpc-api.yaml"
@@ -63,7 +63,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: globex-backend
+  name: guestbook-backend
   description: "Guestbook Backend"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-backend.yaml"
@@ -73,14 +73,14 @@ spec:
   owner: dev-team
   system: globex-system
   dependsOn:
-    - resource:globex-database
+    - resource:guestbook-database
   providesApis:
-    - globex-api
+    - guestbook-api
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: globex-frontend
+  name: guestbook-frontend
   description: "Guestbook Frontend"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-frontend.yaml"
@@ -90,4 +90,4 @@ spec:
   owner: dev-team
   system: globex-system
   consumesApis:
-    - globex-api
+    - guestbook-api
