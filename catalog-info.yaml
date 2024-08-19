@@ -16,7 +16,7 @@ spec:
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: globex-system
+  name: guestbook-system
   tags:
     - globexcorp
 spec:
@@ -33,7 +33,7 @@ spec:
   type: database
   owner: dev-team
   lifecycle: production
-  system: globex-system
+  system: guestbook-system
 ---
 apiVersion: backstage.io/v1alpha1
 kind: API
@@ -46,7 +46,7 @@ spec:
   type: grpc
   lifecycle: production
   owner: dev-team
-  system: globex-system
+  system: guestbook-system
   definition: |
     syntax = "proto3";
     package myorg.mygrpcapi;
@@ -71,7 +71,7 @@ spec:
   type: service
   lifecycle: production
   owner: dev-team
-  system: globex-system
+  system: guestbook-system
   dependsOn:
     - resource:guestbook-database
   providesApis:
@@ -88,6 +88,6 @@ spec:
   type: service
   lifecycle: production
   owner: dev-team
-  system: globex-system
+  system: guestbook-system
   consumesApis:
     - guestbook-api
