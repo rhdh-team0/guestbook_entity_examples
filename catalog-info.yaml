@@ -26,7 +26,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: globex-database
-  description: "Globex Database"
+  description: "MongoDB"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/database.yaml"
 spec:
@@ -64,7 +64,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: globex-backend
-  description: "Globex Backend Service"
+  description: "Guestbook Backend"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-backend.yaml"
 spec:
@@ -73,7 +73,7 @@ spec:
   owner: dev-team
   system: globex-system
   dependsOn:
-    - resource:globex-database
+    - resource: globex-database
   providesApis:
     - globex-api
 ---
@@ -81,7 +81,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: globex-frontend
-  description: "Globex Frontend"
+  description: "Guestbook Frontend"
   annotations:
     backstage.io/managed-by-location: "url:https://github.com/my-org/my-repo/blob/master/my-frontend.yaml"
 spec:
